@@ -54,6 +54,35 @@ public class RestaurantController {
         return ResponseEntity.created(uri).body(entity.toRequest());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable Long id,
+            @RequestBody RestaurantRequest request,
+            UriComponentsBuilder uriBuilder
+    ) {
+        return repository.findById(id)
+        .map(restaurant ->{
+
+            restaurant.setName(request.name());
+
+            restaurant.setDescription(request.description());
+
+            restaurant.setCep(request.cep());
+
+            restaurant.setLatitude(request.latitude());
+
+            restaurant.setLongitude(request.longitude());
+
+            repository.save(restaurant);
+
+            return ResponseEntity.ok(restaurant.toRequest());
+
+        })
+        .orElse(
+                ResponseEntity.notFound().build()
+        );
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(
             @PathVariable Long id
