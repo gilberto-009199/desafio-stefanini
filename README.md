@@ -1,4 +1,37 @@
-# desafio-stefanini
+# desafio-stefanini - Mini IFood
+
+
+ 
+
+## Documentação:
+
+Diagrama de entidades:
+
++ Diagrama restaurantes e Produtos:
+
+```mermaid
+classDiagram
+    class Restaurante {
+        +String nome
+        +String descricao
+        +String cep
+        +Float latitude
+        +Float longitude
+    }
+
+    class Produto {
+        +String nome
+        +String urlImage
+        +String descricao
+        +Double preco
+    }
+
+    Restaurante "1" *-- "0..*" Produto : possui
+```
+
+
+
+
 
 O tema da aplicação é livre — use sua criatividade! 
 

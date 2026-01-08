@@ -2,7 +2,7 @@
 
 Features:
  + Crud Restaurantes
-   + Crud Produtos
+ + Crud Produtos
  + Pesquisa por restaurantes/Produtos
  + Processamento de Pedidos
 
