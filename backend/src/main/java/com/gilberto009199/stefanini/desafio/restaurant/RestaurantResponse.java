@@ -7,4 +7,8 @@ public record RestaurantResponse(
         String cep,
         Float latitude,
         Float longitude
-) {}
+) {
+
+
+
+}
