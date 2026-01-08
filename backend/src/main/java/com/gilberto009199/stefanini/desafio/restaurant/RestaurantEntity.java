@@ -2,12 +2,12 @@ package com.gilberto009199.stefanini.desafio.restaurant;
 
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 
 @Entity
 @Table(name = "tbl_restaurant")
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
 public class RestaurantEntity {
