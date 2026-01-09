@@ -1,0 +1,4 @@
+{
+  "/restaurant/:id/product": "/products?restaurantId=:id",
+  "/restaurant/:id/product/:prodId": "/products/:prodId"
+}

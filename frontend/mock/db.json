@@ -1,0 +1,51 @@
+{
+  "restaurant": [
+    {
+      "id": 53,
+      "name": "O Frances",
+      "description": "Restaurante Frances",
+      "cep": "06434120",
+      "latitude": 0,
+      "longitude": 0
+    },
+    {
+      "name": "O Frances",
+      "description": "Restaurante Frances",
+      "cep": "06434120",
+      "latitude": 0,
+      "longitude": 0,
+      "id": 54
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Petigato",
+      "description": "Bolo de Chocolate com sorvete",
+      "price": 50,
+      "restaurantId": 53,
+      "restaurant": {
+        "id": 53,
+        "name": "O Frances",
+        "description": "Restaurante Frances",
+        "cep": "06434120",
+        "latitude": 0,
+        "longitude": 0,
+        "listProductsEntity": []
+      }
+    },
+    {
+      "id": 2,
+      "name": "Suflê",
+      "description": "Suflê de queijo",
+      "price": 45,
+      "restaurantId": 53
+    },
+    {
+      "name": "Petigato",
+      "description": "Bolo de Chocolate com sorvete",
+      "price": 50,
+      "id": 3
+    }
+  ]
+}
