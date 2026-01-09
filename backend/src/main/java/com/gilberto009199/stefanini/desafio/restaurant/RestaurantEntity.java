@@ -1,8 +1,11 @@
 package com.gilberto009199.stefanini.desafio.restaurant;
 
 
+import com.gilberto009199.stefanini.desafio.product.ProductEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_restaurant")
@@ -14,7 +17,7 @@ public class RestaurantEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long Id;
+    private Long id;
 
     @Column
     private String name;
@@ -31,6 +34,9 @@ public class RestaurantEntity {
     @Column
     private Float longitude;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ProductEntity> listProductsEntity;
+
     public static RestaurantEntity of(RestaurantRequest request) {
         return RestaurantEntity
                 .builder()
@@ -45,9 +51,9 @@ public class RestaurantEntity {
 
     }
 
-    public RestaurantResponse toRequest() {
+    public RestaurantResponse toResponse() {
         return new RestaurantResponse(
-            Id,
+            id,
             name,
             description,
             cep,
