@@ -31,7 +31,7 @@ public class RestaurantController {
     ) {
         return repository.findById(id)
                 .map(restaurant ->
-                        ResponseEntity.ok(restaurant.toRequest())
+                        ResponseEntity.ok(restaurant.toResponse())
                 )
                 .orElse(
                         ResponseEntity.notFound().build()
@@ -51,7 +51,7 @@ public class RestaurantController {
 
         URI uri = uriBuilder.path("/restaurant/{id}").buildAndExpand(entity.getId()).toUri();
 
-        return ResponseEntity.created(uri).body(entity.toRequest());
+        return ResponseEntity.created(uri).body(entity.toResponse());
     }
 
     @PutMapping("/{id}")
@@ -75,7 +75,7 @@ public class RestaurantController {
 
             repository.save(restaurant);
 
-            return ResponseEntity.ok(restaurant.toRequest());
+            return ResponseEntity.ok(restaurant.toResponse());
 
         })
         .orElse(
