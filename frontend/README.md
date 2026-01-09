@@ -1,6 +1,7 @@
 # Frontend
 
 Jornada:
+
 ```mermaid
 sequenceDiagram
   autonumber
