@@ -34,6 +34,17 @@ public class ProductController {
         return ResponseEntity.ok(repository.findAllByRestaurantId(idRestaurant));
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> getById(
+            @PathVariable Long id
+
+    ) {
+        return repository.findById(id)
+            .map(product -> ResponseEntity.ok(product.toResponse()))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<?> save(
             @PathVariable Long idRestaurant,
@@ -55,4 +66,46 @@ public class ProductController {
         return ResponseEntity.created(uri).body(entity.toResponse());
     }
 
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable Long id,
+            @RequestBody ProductRequest request,
+            UriComponentsBuilder uriBuilder
+    ) {
+        return repository.findById(id)
+                .map(product ->{
+
+                    product.setName(request.name());
+
+                    product.setDescription(request.description());
+
+                    product.setPrice(request.price());
+
+                    repository.save(product);
+
+                    return ResponseEntity.ok(product.toResponse());
+
+                })
+                .orElse(
+                        ResponseEntity.notFound().build()
+                );
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(
+            @PathVariable Long id
+    ) {
+        return repository.findById(id)
+                .map(entity -> {
+
+                    repository.delete(entity);
+
+                    return ResponseEntity.noContent().build();
+
+                })
+                .orElse(
+                        ResponseEntity.notFound().build()
+                );
+    }
 }
