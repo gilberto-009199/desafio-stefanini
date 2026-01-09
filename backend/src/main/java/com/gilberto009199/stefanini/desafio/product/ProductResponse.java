@@ -1,4 +1,11 @@
 package com.gilberto009199.stefanini.desafio.product;
 
-public record ProductResponse() {
-}
+import java.math.BigDecimal;
+
+public record ProductResponse(
+        Long Id,
+        String name,
+        String description,
+        BigDecimal price
+) {}
+
