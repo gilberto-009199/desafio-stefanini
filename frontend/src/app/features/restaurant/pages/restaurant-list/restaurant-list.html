@@ -1,1 +1,57 @@
-<p>restaurant-list works!</p>
+<p-card>
+    <ng-template pTemplate="header">
+        <p-toolbar>
+            <ng-template #start>
+            </ng-template>
+            <ng-template #end>
+                <p-button icon="pi pi-refresh" label="Reload" severity="warn" />
+                <p-divider layout="vertical"/>
+                <p-button label="Cadatro" icon="pi pi-plus" severity="primary"/>
+            </ng-template>
+        </p-toolbar>
+    </ng-template>
+
+    <ng-template pTemplate="body">
+        
+            <p-treetable [value]="restaurant()" [columns]="columns">
+                <ng-template #header>
+                    <tr>
+                        <th>
+                            Nome
+                        </th>
+                        <th>
+                            N. Produtos
+                        </th>
+                        <th>
+                            N. de Pedidos
+                        </th>
+                        <th class="w-40">
+                            
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-rowNode let-rowData="rowData">
+                    <tr [ttRow]="rowNode">
+                        <td>
+                            @if (rowNode.node.children && rowNode.node.children.length > 0) {
+                                <p-treeTableToggler [rowNode]="rowNode" />
+                            }
+                            {{ rowData.name }}
+                        </td>
+                        <td>{{ rowData?.produtos?.length || 0 }}</td>
+                        <td>{{ rowData?.pedidos?.length || 0 }}</td>
+                        <td>
+                            <p-button icon="pi pi-pencil" outlined  />
+                            &nbsp;
+                            <p-button icon="pi pi-times" outlined severity="danger"/>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template #footer>
+                    
+                </ng-template>
+            </p-treetable>
+        
+    </ng-template>
+
+</p-card>
