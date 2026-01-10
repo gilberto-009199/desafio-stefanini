@@ -1,0 +1,44 @@
+<p-toolbar 
+    [style]="{ 
+            'border': '0',
+            'border-radius': '0',
+            'border-bottom': '1px solid #323232',
+            'margin': 'none',
+            'padding': '1rem 1rem 1rem 1.5rem'
+        }"
+    class="shadow-1 p-3">
+    <ng-template pTemplate="start">
+        
+        <p-button 
+            
+            icon="pi pi-bars" 
+            (onClick)="drawerVisible = true" 
+            [text]="true" 
+            severity="secondary" />
+
+        <p-divider layout="vertical" />
+
+        <p-breadcrumb 
+            [model]="breadcumbsItems"
+            [home]="home" 
+            [style]="{'background': 'transparent', 'border': 'none', 'padding': '0'}" />
+    </ng-template>
+
+    <ng-template pTemplate="end">
+        <p-button 
+            [icon]="isDarkMode ? 'pi pi-sun' : 'pi pi-moon'" 
+            [rounded]="true" 
+            [text]="true"
+            severity="primary"
+            (onClick)="toggleDarkMode()" />
+    </ng-template>
+</p-toolbar>
+
+
+<p-drawer [(visible)]="drawerVisible" header="Menu">
+    
+    <div class="card flex justify-center">
+        <p-panelmenu [model]="menuItems" class="w-full md:w-80" />
+    </div>
+    
+  </p-drawer>
