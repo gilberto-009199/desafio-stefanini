@@ -1,19 +1,27 @@
 <p-card>
     <ng-template pTemplate="header">
+        
         <p-toolbar>
             <ng-template #start>
             </ng-template>
             <ng-template #end>
-                <p-button icon="pi pi-refresh" label="Reload" severity="warn" />
-                <p-divider layout="vertical"/>
-                <p-button label="Cadatro" icon="pi pi-plus" severity="primary"/>
+                @if(isLoading){
+                    <p-skeleton width="4rem" height="2rem" />
+                    <p-divider layout="vertical"/>
+                    <p-skeleton width="4rem" height="2rem" />
+                } @else {
+                    <p-button icon="pi pi-refresh" label="Reload" severity="warn" (click)="loadRestaurant()"/>
+                    <p-divider layout="vertical"/>
+                    <p-button label="Cadatro" icon="pi pi-plus" severity="primary" [routerLink]="['/restaurant/new']"/>
+                }
             </ng-template>
         </p-toolbar>
+        
     </ng-template>
 
     <ng-template pTemplate="body">
         
-            <p-treetable [value]="restaurant()" [columns]="columns">
+            <p-treetable [value]="restaurant()">
                 <ng-template #header>
                     <tr>
                         <th>
@@ -30,7 +38,29 @@
                         </th>
                     </tr>
                 </ng-template>
+                @if(isLoading){
+                    <ng-template #body>
+                        <tr>
+                            <td>
+                                <p-skeleton height="2rem" />
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem" />
+                            </td>
+                            <td>
+                                <p-skeleton height="2rem" />
+                            </td>
+                            <td class="flex align-items-center gap-2">
+                                
+                                <p-skeleton size="3rem"/>
+                                <p-skeleton size="3rem"/>
+                                
+                            </td>
+                        </tr>
+                    </ng-template>        
+                }
                 <ng-template #body let-rowNode let-rowData="rowData">
+                    
                     <tr [ttRow]="rowNode">
                         <td>
                             @if (rowNode.node.children && rowNode.node.children.length > 0) {
@@ -41,7 +71,8 @@
                         <td>{{ rowData?.produtos?.length || 0 }}</td>
                         <td>{{ rowData?.pedidos?.length || 0 }}</td>
                         <td>
-                            <p-button icon="pi pi-pencil" outlined  />
+                            <p-button icon="pi pi-pencil" outlined [routerLink]="['/restaurant', rowData.id]" />
+                            
                             &nbsp;
                             <p-button icon="pi pi-times" outlined severity="danger"/>
                         </td>

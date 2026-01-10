@@ -1,1 +1,66 @@
-<p>restaurant-form works!</p>
+
+<p-card>
+    <ng-template #title> Advanced Card </ng-template>
+    <ng-template #subtitle> Card subtitle </ng-template>
+
+    <p-card header="Cadastro de Restaurante">
+        <div class="grid">
+            
+            <div class="col-12 md:col-8">
+                <p-card subheader="Localização no Mapa">
+                    <div id="map" style="height: 500px; border-radius: 8px;"></div>
+                    <small class="text-color-secondary">Clique no mapa para definir a latitude e longitude</small>
+                </p-card>
+            </div>
+    
+            <div class="col-12 md:col-4">
+                <p-card subheader="Dados do Estabelecimento" styleClass="h-full shadow-2">
+                    <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()" class="p-fluid">
+                        
+                        <div class="field mb-3">
+                            <label for="name" class="font-bold">Nome</label>
+                            <input id="name" type="text" pInputText formControlName="name" />
+                        </div>
+    
+                        <div class="field mb-3">
+                            <label for="cep" class="font-bold">CEP</label>
+                            <p-inputMask mask="99999-999" formControlName="cep" [unmask]="true"></p-inputMask>
+                        </div>
+    
+                        <div class="field mb-3">
+                            <label for="description" class="font-bold">Descrição</label>
+                            <textarea id="description" pInputTextarea formControlName="description" rows="3"></textarea>
+                        </div>
+    
+                        <div class="field mb-3">
+                            <label for="latitude" class="font-bold">Latitude</label>
+                            <p-inputNumber formControlName="latitude" [minFractionDigits]="6" [readonly]="true"></p-inputNumber>
+                        </div>
+    
+                        <div class="field mb-4">
+                            <label for="longitude" class="font-bold">Longitude</label>
+                            <p-inputNumber formControlName="longitude" [minFractionDigits]="6" [readonly]="true"></p-inputNumber>
+                        </div>
+    
+                        <p-button label="Salvar Restaurante" icon="pi pi-save" type="submit" [disabled]="restaurantForm.invalid"></p-button>
+                    </form>
+                </p-card>
+            </div>
+    
+        </div>
+    </p-card>
+
+
+
+
+
+    <ng-template #footer>
+        <div class="flex gap-4 mt-1 align-items-left">
+            <p-button label="Cancel" severity="secondary" outlined  />
+            <div class="col-12">
+                <p-button label="Cadastrar Restaurante" icon="pi pi-check" type="submit" [disabled]="restaurantForm.invalid"></p-button>
+            </div>
+        </div>
+    </ng-template>
+
+</p-card>

@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 
 import { providePrimeNG } from 'primeng/config';
 import Lara from '@primeuix/themes/lara';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
           }
         }
     }),
+    provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes)
   ]

@@ -19,6 +19,8 @@ import { Fieldset } from 'primeng/fieldset';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeNode } from 'primeng/api';
 import { Divider } from "primeng/divider";
+import { RestaurantService } from '../../services/restaurant';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-restaurant-list',
@@ -30,7 +32,9 @@ import { Divider } from "primeng/divider";
     RouterLink,
     Toolbar,
     Fieldset,
+    Divider,
     TreeTableModule,
+    SkeletonModule,
     Divider
 ],
   templateUrl: './restaurant-list.html',
@@ -38,22 +42,33 @@ import { Divider } from "primeng/divider";
 })
 export class RestaurantList implements OnInit{
 
-  
-  columns = ['list', 'grid', ''];
+  isLoading = true;
   restaurant = signal<TreeNode[]>([]);
-
   
+  constructor(
+    private restauranteService : RestaurantService
+  ){}
+
   ngOnInit(){
-      
-    this.restaurant.set([
-      {
-        data: { name: 'Norte', type: 'Região' },
-        children: [
-          
-        ]
-      }
-    ])
+    
+    this.loadRestaurant()
 
   }
 
+  loadRestaurant(){
+    this.isLoading = true;
+    this.restauranteService
+    .getRestaurants()
+    .subscribe(listRstaurant =>{
+      this.isLoading = false;
+      this.restaurant.set(
+        listRstaurant.map(restaurant =>({
+          data: restaurant,
+          children: [], 
+          expanded: false
+        }))
+      )
+      
+    })  
+  }
 }
